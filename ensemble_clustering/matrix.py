@@ -10,14 +10,14 @@ import numpy as np
 
 
 class E():
-    def __init__(self, meta_res: List, param_perms: Dict[str, List[Dict[Any]]]):
+    def __init__(self, meta_res: List, param_perms: Dict[str, List[Dict]]):
         '''
         On init, just build E according to mode or raw.
         '''
         self.meta_res = meta_res
         self.param_perms = param_perms
 
-    def get_best_algo(self, ground_truth: int, single: bool) -> List[Tuple[str, Dict[Any]]]:
+    def get_best_algo(self, ground_truth: int, single: bool) -> List[Tuple[str, Dict]]:
         if ground_truth is None:
             return None
 
@@ -112,7 +112,7 @@ class E():
                         )
                     )
 
-    def __call__(self, e_params: Dict[Any]) -> Dict[Any]:
+    def __call__(self, e_params: Dict) -> Dict:
         E_res = {
             build: {
                 vote: {
