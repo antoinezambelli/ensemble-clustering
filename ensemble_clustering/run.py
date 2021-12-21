@@ -1,7 +1,6 @@
 from sklearn.datasets import make_blobs
 
 from .ensemble import Ensemble
-from .clustering import Clustering
 from .matrix import E
 
 
