@@ -38,7 +38,7 @@ class Clustering():
         self.algo_params = algo_params
         self.algo_metrics = algo_metrics
 
-    def get_hca_votes(self, h_params: Dict[Any], algo: str) -> Dict[Any]:
+    def get_hca_votes(self, h_params: Dict[Any], algo: str):
         for _ in tqdm(range(1), desc=algo, ncols=100, leave=None):
             c_params = {k: (v if v else e) for k, v in self.algo_params[algo].items()}
             c_params.update(h_params)
