@@ -3,7 +3,7 @@ from scipy.cluster.hierarchy import fcluster
 from sklearn.metrics import silhouette_score
 
 
-def get_n(Y_p):
+def get_n(Y_p: np.ndarray) -> int:
     '''
     Convenience method: finds elbow in curve by using vector rejection.
     '''
@@ -22,13 +22,13 @@ def get_n(Y_p):
     # Pick the longest connecting line - note max_idx added to slice back into original data.
     return max_idx + np.argmax(norm_vec)
 
-def max_diff(Z):
+def max_diff(Z) -> int:
     return len(Z) - np.argmax(np.diff(Z[:,2]))
 
-def elbow(Z):
+def elbow(Z) -> int:
     return len(Z) - (np.argmax(np.diff(Z[:,2], 2)) + 1)
 
-def hca_metrics(X, Z, sub_str):
+def hca_metrics(X, Z, sub_str: str) -> int:
     # Loop down the dendrogram and try different cutoffs - choose by sub_string method.
     rr = []
     for i in range(2, 7):
@@ -43,7 +43,7 @@ def hca_metrics(X, Z, sub_str):
 
     return len(np.unique(labels))
 
-def aic(model, X, algo, labels):
+def aic(model, X, algo: str, labels):
     if algo == 'GaussianMixture':
         n_params = model._n_parameters()
     elif algo == 'MiniBatchKMeans':
@@ -52,7 +52,7 @@ def aic(model, X, algo, labels):
 
     return -2 * model.score(X) * X.shape[0] + 2 * n_params
 
-def bic(model, X, algo, labels):
+def bic(model, X, algo: str, labels):
     if algo == 'GaussianMixture':
         n_params = model._n_parameters()
     elif algo == 'MiniBatchKMeans':
