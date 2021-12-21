@@ -1,5 +1,13 @@
 import itertools
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    Union
+)
 
+import numpy as np
 from tqdm import tqdm
 
 from .clustering import Clustering
@@ -7,7 +15,7 @@ from .matrix import E
 
 
 class Ensemble():
-    def __init__(self, algo_metrics, algo_params, h_params):
+    def __init__(self, algo_metrics: Dict[str, List[str]], algo_params: Dict[str, Dict], h_params: Dict[str, Dict]):
         '''
         On init, just compute all the parameter combinations.
         '''
@@ -39,7 +47,7 @@ class Ensemble():
                     for v in itertools.product(*h_params[cluster_str].values())
                 ]
 
-    def generate_results(self, my_clust, algo_selections):
+    def generate_results(self, my_clust: Clustering, algo_selections: List[str]) -> Dict[str, List[Dict]]:
         res = {algo: [] for algo in algo_selections}  # Results holder.
 
         # Loop through all algorithms.
@@ -52,7 +60,13 @@ class Ensemble():
 
         return res
 
-    def __call__(self, X, k_range, e_params=None, algo_selections=None):
+    def __call__(
+            self,
+            X,
+            k_range: Union[List[int], Tuple[int, int]],
+            e_params: Optional[Dict]=None,
+            algo_selections: Optional[List[str]]=None
+        ) -> Union[Tuple[Dict[str, List[Dict]], Dict], Tuple[Dict[str, List[Dict]], None]]:
         '''
         On call, pass in workflow stuff (just algos to examine and (2,7) range for now) and datasets.
         '''

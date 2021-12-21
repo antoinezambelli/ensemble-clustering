@@ -1,18 +1,23 @@
 import itertools
 import warnings
+from typing import (
+    Dict,
+    List,
+    Tuple
+)
 
 import numpy as np
 
 
 class E():
-    def __init__(self, meta_res, param_perms):
+    def __init__(self, meta_res: List, param_perms: Dict[str, List[Dict]]):
         '''
         On init, just build E according to mode or raw.
         '''
         self.meta_res = meta_res
         self.param_perms = param_perms
 
-    def get_best_algo(self, ground_truth, single):
+    def get_best_algo(self, ground_truth: int, single: bool) -> List[Tuple[str, Dict]]:
         if ground_truth is None:
             return None
 
@@ -59,16 +64,17 @@ class E():
 
         return top_perms
 
-    def build_matrix(self, build):
+    def build_matrix(self, build: str):
         if build == 'mode':
             res = {k: list(np.argmax(np.bincount(list(sub_v.values()))) for sub_v in v) for k, v in self.res.items()}
         else:
             res = {k: list(val for sub_v in v for val in sub_v.values()) for k, v in self.res.items()}
 
         self.e = np.array(list(itertools.product(*res.values())))
+
         return self
 
-    def get_num_clusters(self, vote):
+    def get_num_clusters(self, vote: str) -> int:
         if vote == 'full':
             return np.argmax(np.bincount(self.e.flatten()))
 
@@ -80,7 +86,7 @@ class E():
 
         return np.argmax(np.bincount(wombat))
 
-    def evaluate(self, E_res, ground_truth):
+    def evaluate(self, E_res, ground_truth: int):
         '''
         Loop over possible build/vote constructs and check performance.
         '''
@@ -106,7 +112,7 @@ class E():
                         )
                     )
 
-    def __call__(self, e_params):
+    def __call__(self, e_params: Dict) -> Dict:
         E_res = {
             build: {
                 vote: {
