@@ -47,7 +47,7 @@ class Ensemble():
                     for v in itertools.product(*h_params[cluster_str].values())
                 ]
 
-    def generate_results(self, my_clust: Clustering, algo_selections: List[str]) -> Dict[str, List[Dict[Any]]]:
+    def generate_results(self, my_clust: Clustering, algo_selections: List[str]) -> Dict[str, List[Dict]]:
         res = {algo: [] for algo in algo_selections}  # Results holder.
 
         # Loop through all algorithms.
@@ -64,9 +64,9 @@ class Ensemble():
             self,
             X,
             k_range: Union[List[int], Tuple[int, int]],
-            e_params: Optional[Dict[Any]]=None,
+            e_params: Optional[Dict]=None,
             algo_selections: Optional[List[str]]=None
-        ) -> Union[Tuple[Dict[str, List[Dict[Any]]], Dict[Any]], Tuple[Dict[str, List[Dict[Any]]], None]]:
+        ) -> Union[Tuple[Dict[str, List[Dict]], Dict], Tuple[Dict[str, List[Dict]], None]]:
         '''
         On call, pass in workflow stuff (just algos to examine and (2,7) range for now) and datasets.
         '''

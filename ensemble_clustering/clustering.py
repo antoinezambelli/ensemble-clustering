@@ -37,7 +37,7 @@ class Clustering():
         self.algo_params = algo_params
         self.algo_metrics = algo_metrics
 
-    def get_hca_votes(self, h_params, algo: str) -> Dict[str, int]:
+    def get_hca_votes(self, h_params: Dict, algo: str) -> Dict[str, int]:
         for _ in tqdm(range(1), desc=algo, ncols=100, leave=None):
             c_params = {k: (v if v else e) for k, v in self.algo_params[algo].items()}
             c_params.update(h_params)
@@ -55,7 +55,7 @@ class Clustering():
 
         return vote_dict
 
-    def run_trial(self, graph, h_params, n_c: int, algo: str):
+    def run_trial(self, graph, h_params: Dict, n_c: int, algo: str):
         '''
         Generate labels for that n_c.
         '''
@@ -68,7 +68,7 @@ class Clustering():
 
         return model, labels
 
-    def compute_graph(self, h_params):
+    def compute_graph(self, h_params: Dict):
         '''
         Compute nearest-neighbors graph if needed.
         '''
@@ -85,7 +85,7 @@ class Clustering():
 
         return graph
 
-    def get_votes(self, h_params, algo: str) -> Dict[str, int]:
+    def get_votes(self, h_params: Dict, algo: str) -> Dict[str, int]:
         '''
         Loop through n_c and evaluate using metrics.
         '''
@@ -118,7 +118,7 @@ class Clustering():
 
         return vote_dict
 
-    def __call__(self, h_params, algo: str) -> Dict[str, int]:
+    def __call__(self, h_params: Dict, algo: str) -> Dict[str, int]:
         '''
         Call for each hyperparameter combination and algo (clustering algorithm).
         '''
