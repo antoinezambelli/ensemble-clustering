@@ -14,7 +14,7 @@ def algo_metrics_init():
 
     return {
         'MiniBatchKMeans': ['aic', 'bic', 'inertia', 'silhouette_score'],
-        'SpectralClustering': ['aic'],
+        'SpectralClustering': ['inertia'],
         'GaussianMixture': ['bic'],
         'linkage_vector': ['elbow', 'inertia', 'max_diff']
     }
@@ -48,7 +48,7 @@ def h_params_init():
         'SpectralClustering': {
             'affinity': ['laplacian', 'precomputed'],
             'metric': ['l2'],  # Only used for 'precomputed'.
-            'n_neighbors': [5, 20],  # Only used for 'precomputed'.
+            'n_neighbors': [5],  # Only used for 'precomputed'.
             'gamma': [0.1, 1.0],  # Ignored for 'precomputed'.
         }
     }
