@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 
 
-version = '0.2.0'
+version = '0.2.1'
 
 setup(
     name='ensemble-clustering',
@@ -23,6 +23,7 @@ setup(
     packages=find_packages(
         exclude=('examples', 'test_data', 'unit_tests')
     ),
+    python_requires=">=3.9",
     include_package_data=True,
     install_requires=[
         'fastcluster>=1.2.4',
