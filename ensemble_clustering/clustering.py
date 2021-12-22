@@ -79,7 +79,6 @@ class Clustering():
                 metric=h_params['metric']
             ).fit(X)
         except ValueError as err:
-            tqdm.write('error')
             nbrs = NearestNeighbors(n_neighbors=h_params['n_neighbors'], algorithm='auto').fit(X)
         graph = nbrs.kneighbors_graph(X, mode='distance')
 

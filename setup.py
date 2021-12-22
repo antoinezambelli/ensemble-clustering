@@ -1,15 +1,15 @@
-"""
+'''
 #
 # ensemble-clustering setup.py
 #
 # Copyright(c) 2021, Antoine Emil Zambelli.
 #
-"""
+'''
 
 from setuptools import setup, find_packages
 
 
-version = '0.1.0'
+version = '0.2.0'
 
 setup(
     name='ensemble-clustering',
@@ -21,18 +21,7 @@ setup(
     description='Ensemble Clustering',
     long_description='Code companion to: Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning',
     packages=find_packages(
-        exclude=(
-           '.*',
-           'EGG-INFO',
-           '*.egg-info',
-           '_trial*',
-           "*.tests",
-           "*.tests.*",
-           "tests.*",
-           "tests",
-           "examples.*",
-           "examples",
-        )
+        exclude=('examples', 'test_data', 'unit_tests')
     ),
     include_package_data=True,
     install_requires=[
