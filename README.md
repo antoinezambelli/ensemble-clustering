@@ -17,7 +17,7 @@ Contained in `setup.py` (note that it might be possible to use lower-version pac
 
 ## Usage
 
-Once the library is installed, it can be used as follows (this is also presented in the `/examples` directory).
+Once the library is installed, it can be used as follows (this is also presented in the `examples` directory).
 
 ### Parameters
 
@@ -63,12 +63,10 @@ e_params = {
 
 ### Single Dataset
 
-To cluster and analyze a single dataset, we can simply run
+To cluster and analyze a single dataset, we can simply run (see `examples/single.py` for details)
 
 ```
-from sklearn.datasets import make_blobs
-
-from ensemble_clustering import Ensemble, E
+from ensemble_clustering import Ensemble
 
 
 X, y = make_blobs(n_samples=30000, centers=3, n_features=2, center_box=(-5, 5), random_state=1)
@@ -79,11 +77,9 @@ res, nc_res = my_ensemble(X, (2, 7), e_params)
 
 ### Multiple Datasets
 
-To analyze multiple datasets (subsets for instance) we would run
+To analyze multiple datasets (subsets for instance) we would run (see `examples/multi.py` for details)
 
 ```
-from sklearn.datasets import make_blobs
-
 from ensemble_clustering import Ensemble, E
 
 
@@ -100,6 +96,10 @@ for seed in range(1, 3):
 my_E = E(full_res, my_ensemble.param_perms)
 E_res = my_E(e_params)
 ```
+
+### Paper Results
+
+Code used to recreate the paper results can be found in `examples/paper.py`. Note that it will likely take several days to run depending on your hardware.
 
 ### Result Format
 
