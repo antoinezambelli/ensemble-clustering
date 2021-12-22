@@ -77,10 +77,10 @@ class Clustering():
                 n_neighbors=h_params['n_neighbors'],
                 algorithm='auto',
                 metric=h_params['metric']
-            ).fit(X)
+            ).fit(self.X)
         except ValueError as err:
             nbrs = NearestNeighbors(n_neighbors=h_params['n_neighbors'], algorithm='auto').fit(X)
-        graph = nbrs.kneighbors_graph(X, mode='distance')
+        graph = nbrs.kneighbors_graph(self.X, mode='distance')
 
         return graph
 
