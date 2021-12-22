@@ -3,6 +3,7 @@ import warnings
 from typing import (
     Dict,
     List,
+    Optional,
     Tuple
 )
 
@@ -17,7 +18,7 @@ class E():
         self.meta_res = meta_res
         self.param_perms = param_perms
 
-    def get_best_algo(self, ground_truth: int, single: bool) -> List[Tuple[str, Dict]]:
+    def get_best_algo(self, ground_truth: Optional[int], single: bool) -> List[Tuple[str, Dict]]:
         if ground_truth is None:
             return None
 
@@ -134,7 +135,7 @@ class E():
 
             # Loop through all possible builds and votes.
             for build in e_params['build']:
-                self.build_matrix(e_params['build'])
+                self.build_matrix(build)
 
                 for vote in e_params['vote']:
                     num_clusters = self.get_num_clusters(vote)

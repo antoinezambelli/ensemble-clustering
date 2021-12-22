@@ -49,7 +49,7 @@ class Clustering():
 
             # Cases: inertia/silhouette (shared methods require hca() call); elbow/max_diff (hca-specific methods).
             if m_str in ['inertia', 'silhouette_score']:
-                vote_dict[m_str] = hca_metrics(self.X, Z, m_str)
+                vote_dict[m_str] = hca_metrics(self.X, self.k_range, Z, m_str)
             else:
                 vote_dict[m_str] = globals().get(m_str, None)(Z)
 
@@ -77,10 +77,10 @@ class Clustering():
                 n_neighbors=h_params['n_neighbors'],
                 algorithm='auto',
                 metric=h_params['metric']
-            ).fit(X)
+            ).fit(self.X)
         except ValueError as err:
-            nbrs = NearestNeighbors(n_neighbors=h_params['n_neighbors'], algorithm='auto').fit(X)
-        graph = nbrs.kneighbors_graph(X, mode='distance')
+            nbrs = NearestNeighbors(n_neighbors=h_params['n_neighbors'], algorithm='auto').fit(self.X)
+        graph = nbrs.kneighbors_graph(self.X, mode='distance')
 
         return graph
 

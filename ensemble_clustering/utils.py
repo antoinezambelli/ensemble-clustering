@@ -28,10 +28,10 @@ def max_diff(Z) -> int:
 def elbow(Z) -> int:
     return len(Z) - (np.argmax(np.diff(Z[:,2], 2)) + 1)
 
-def hca_metrics(X, Z, sub_str: str) -> int:
+def hca_metrics(X, k_range, Z, sub_str: str) -> int:
     # Loop down the dendrogram and try different cutoffs - choose by sub_string method.
     rr = []
-    for i in range(2, 7):
+    for i in range(k_range[0], k_range[1]):
         max_d = (Z[-i, 2] + Z[-i + 1, 2]) / 2.0  # Midpoint between joins.
         labels = fcluster(Z, max_d, criterion='distance')  # Labels with that candidate cutoff.
 

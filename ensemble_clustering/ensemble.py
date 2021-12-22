@@ -37,7 +37,7 @@ class Ensemble():
                 ] + [
                     dict(zip(h_params[cluster_str], v))
                     for v in itertools.product(
-                        ['laplacian', 'rbf', 'sigmoid'], ['euclidian'],
+                        [x for x in h_params[cluster_str]['affinity'] if x != 'precomputed'], ['euclidian'],
                         [5], h_params[cluster_str]['gamma']
                     )
                 ]
