@@ -1,5 +1,7 @@
 # ensemble-clustering
 
+![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/ci_workflow/badge.svg)
+
 Companion code to "Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning". TODO: link to paper. Builds an ensemble clustering framework, computes clusterings and validates results if given ground truth.
 
 ## Installation
