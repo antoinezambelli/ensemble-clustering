@@ -42,17 +42,3 @@ def test_algo_selections(algo_metrics_init, algo_params_init, h_params_init, X_r
     assert len(res) == len(algo_selections_run)  # Test that we got all the keys.
     assert all(x in res for x in algo_selections_run)  # Test exact key match.
     assert all(v in res[k][0] for k in algo_selections_run for v in algo_metrics_init[k])  # Test that we got all metrics.
-
-# TODO: for all...use param_perms_output get perms. then pass in [0]'th perm and specific algo.
-
-# TODO: main test.
-# test with mini, hca, spectral.
-# test with many n_c to get different numbers.
-# match output keys == metrics, values == ??.
-
-# TODO: compute_graph test. match output to explicit kneighbors(X_run)
-
-# TODO: run_trial test...match model object to explicit Mini initialized, labels to known value.
-
-# NOTE: can test all of them in one test if we wanted...
-

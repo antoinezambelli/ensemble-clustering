@@ -49,7 +49,7 @@ class Clustering():
 
             # Cases: inertia/silhouette (shared methods require hca() call); elbow/max_diff (hca-specific methods).
             if m_str in ['inertia', 'silhouette_score']:
-                vote_dict[m_str] = hca_metrics(self.X, Z, m_str)
+                vote_dict[m_str] = hca_metrics(self.X, self.k_range, Z, m_str)
             else:
                 vote_dict[m_str] = globals().get(m_str, None)(Z)
 

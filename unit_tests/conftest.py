@@ -108,3 +108,55 @@ def graph_output():
 def trial_output_labels():
 
     return np.array([2, 0, 2, 2, 1, 4, 1, 0, 3, 2])
+
+@pytest.fixture
+def ensemble_output():
+
+    return {
+        'MiniBatchKMeans': [
+            {'aic': 3, 'bic': 3, 'inertia': 3, 'silhouette_score': 3},
+            {'aic': 3, 'bic': 3, 'inertia': 3, 'silhouette_score': 3}
+        ],
+        'linkage_vector': [
+            {'elbow': 2, 'inertia': 2, 'max_diff': 2},
+            {'elbow': 3, 'inertia': 3, 'max_diff': 3}
+        ]
+    }
+
+@pytest.fixture
+def e_params_input():
+
+    return {
+        'build': ['mode', 'raw'],
+        'vote': ['row', 'col', 'full'],
+        'ground_truth': 3
+    }
+
+@pytest.fixture
+def E_output():
+
+    return {
+        'mode': {
+            'row': {'num_clusters': [2]},
+            'col': {'num_clusters': [2]},
+            'full': {'num_clusters': [3]}
+        },
+        'raw': {
+            'row': {'num_clusters': [2]},
+            'col': {'num_clusters': [2]},
+            'full': {'num_clusters': [3]}
+        },
+        'best_algo': [
+            [
+                ('MiniBatchKMeans', {'init': 'k-means++', 'reassignment_ratio': 0.0001}),
+                ('MiniBatchKMeans', {'init': 'k-means++', 'reassignment_ratio': 0.5}),
+                ('linkage_vector', {'method': 'median', 'metric': 'euclidean'})
+            ]
+        ],
+        'best_algo_global': [
+            ('MiniBatchKMeans', {'init': 'k-means++', 'reassignment_ratio': 0.0001}),
+            ('MiniBatchKMeans', {'init': 'k-means++', 'reassignment_ratio': 0.5}),
+            ('linkage_vector', {'method': 'median', 'metric': 'euclidean'})
+        ]
+    }
+
