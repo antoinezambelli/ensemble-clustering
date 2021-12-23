@@ -1,6 +1,6 @@
 # ensemble-clustering
 
-![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/unit-tests.yml/badge.svg)
+![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/unit-tests.yml/badge.svg) [![codecov](https://app.codecov.io/gh/antoinezambelli/ensemble-clustering/branch/main/graph/badge.svg)](https://app.codecov.io/gh/antoinezambelli/ensemble-clustering/)
 
 Companion code to "Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning". TODO: link to paper.
 
@@ -15,7 +15,6 @@ Contained in `setup.py` (note that it might be possible to use lower-version pac
 
 - `fastcluster>=1.2.4`,
 - `numpy>=1.20.3`,
-- `pytest>=6.2.5`,
 - `scikit-learn>=1.0`,
 - `scipy>=1.7.1`,
 - `tqdm>=4.62.3`,
