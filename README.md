@@ -1,6 +1,6 @@
 # ensemble-clustering
 
-![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/unit-tests.yml/badge.svg) [![codecov](https://app.codecov.io/gh/antoinezambelli/ensemble-clustering/branch/main/graph/badge.svg)](https://app.codecov.io/gh/antoinezambelli/ensemble-clustering/)
+![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/unit-tests.yml/badge.svg) [![codecov](https://codecov.io/gh/antoinezambelli/ensemble-clustering/branch/main/graph/badge.svg?token=SPW6ID4OOM)](https://codecov.io/gh/antoinezambelli/ensemble-clustering)
 
 Companion code to "Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning". TODO: link to paper.
 
