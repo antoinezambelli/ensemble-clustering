@@ -21,6 +21,13 @@ jobs:
       - name: "Install dependencies"
         run: |
           python -m pip install -e .
-      - name: "Run tests"
+      - name: "Install testing suite"
         run: |
-          pytest unit_tests
+          python -m pip install pytest>=6.2.5
+          python -m pip install coverage>=6.2
+      - name: "Run tests and collect coverage"
+        run: |
+          coverage run -m pytest unit_tests
+          coverage xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
