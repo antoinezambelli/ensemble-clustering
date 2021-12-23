@@ -1,5 +1,7 @@
 '''
-Unit tests for clustering.py
+test_clustering.py: Unit tests for clustering.py.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 import pytest

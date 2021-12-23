@@ -1,3 +1,9 @@
+'''
+utils.py: Contains metric-related methods to compute elbows or populate elbow curves.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
+'''
+
 import numpy as np
 from scipy.cluster.hierarchy import fcluster
 from sklearn.metrics import silhouette_score
@@ -5,7 +11,7 @@ from sklearn.metrics import silhouette_score
 
 def get_n(Y_p: np.ndarray) -> int:
     '''
-    Convenience method: finds elbow in curve by using vector rejection.
+    Finds elbow in curve by using vector rejection (triangle method).
     '''
     max_idx = np.argmax(Y_p)
 
@@ -23,12 +29,21 @@ def get_n(Y_p: np.ndarray) -> int:
     return max_idx + np.argmax(norm_vec)
 
 def max_diff(Z) -> int:
+    '''
+    Finds the maximum-difference jump point in a dendrogram (per https://doi.org/10.12688/f1000research.10103.1).
+    '''
     return len(Z) - np.argmax(np.diff(Z[:,2]))
 
 def elbow(Z) -> int:
+    '''
+    Finds the elbow in jump points in a dendrogram (per https://doi.org/10.12688/f1000research.10103.1).
+    '''
     return len(Z) - (np.argmax(np.diff(Z[:,2], 2)) + 1)
 
 def hca_metrics(X, k_range, Z, sub_str: str) -> int:
+    '''
+    Wrapper method to handle linkage_vector metrics in general cases (inertia, silhouette).
+    '''
     # Loop down the dendrogram and try different cutoffs - choose by sub_string method.
     rr = []
     for i in range(k_range[0], k_range[1]):
@@ -44,6 +59,9 @@ def hca_metrics(X, k_range, Z, sub_str: str) -> int:
     return len(np.unique(labels))
 
 def aic(model, X, algo: str, labels):
+    '''
+    Computes AIC.
+    '''
     if algo == 'GaussianMixture':
         n_params = model._n_parameters()
     elif algo == 'MiniBatchKMeans':
@@ -53,6 +71,9 @@ def aic(model, X, algo: str, labels):
     return -2 * model.score(X) * X.shape[0] + 2 * n_params
 
 def bic(model, X, algo: str, labels):
+    '''
+    Computes BIC.
+    '''
     if algo == 'GaussianMixture':
         n_params = model._n_parameters()
     elif algo == 'MiniBatchKMeans':
@@ -62,6 +83,9 @@ def bic(model, X, algo: str, labels):
     return -2 * model.score(X) * X.shape[0] + n_params * np.log(X.shape[0])
 
 def inertia(X, labels):
+    '''
+    Computes inertia from a labeled dataset.
+    '''
     # Manual inertia function...sum of squared distances between point and it's assigned center.
     labs = np.unique(labels)
     centroids = np.zeros_like(X)  # To store centroids for easier computation.

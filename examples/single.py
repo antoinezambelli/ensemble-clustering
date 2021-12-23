@@ -1,3 +1,9 @@
+'''
+multi.py: Example of how to call the workflow in a single-dataset case.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
+'''
+
 from sklearn.datasets import make_blobs
 
 from ensemble_clustering import Ensemble

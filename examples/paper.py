@@ -1,3 +1,10 @@
+'''
+paper.py: Example of how to call the workflow to reproduce results from
+"Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning".
+
+Copyright(c) 2021, Antoine Emil Zambelli.
+'''
+
 from sklearn.datasets import make_blobs
 from tqdm import tqdm
 

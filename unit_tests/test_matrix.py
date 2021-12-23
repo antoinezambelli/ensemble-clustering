@@ -1,5 +1,7 @@
 '''
-Unit tests for matrix.py
+test_matrix.py: Unit tests for matrix.py.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 import pytest

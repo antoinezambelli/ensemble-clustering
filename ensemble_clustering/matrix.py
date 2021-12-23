@@ -1,3 +1,9 @@
+'''
+matrix.py: Contains E class which builds the E matrix and get num_clusters and best algorithm combinations.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
+'''
+
 import itertools
 import warnings
 from typing import (
@@ -13,12 +19,23 @@ import numpy as np
 class E():
     def __init__(self, meta_res: List, param_perms: Dict[str, List[Dict]]):
         '''
-        On init, just build E according to mode or raw.
+        On init, just store inputs.
+        Inputs:
+            meta_res: list of outputs from Ensemble() calls, can be a single-element list.
+            param_perms: see output from Ensemble.__init__(), dicitonary of hyperparams for each algo.
+        Outputs:
+            None.
         '''
         self.meta_res = meta_res
         self.param_perms = param_perms
 
     def get_best_algo(self, ground_truth: Optional[int], single: bool) -> List[Tuple[str, Dict]]:
+        '''
+        Finds the "best" algorithm-hyperparameter combination to use for a given dataset.
+        Current logic is to pick combinations that match ground truth across the most metrics.
+        Note that for a single dataset, this is likely to result in a tie.
+        Additional logic included but not leveraged: 'most top performing perms out of all perms'.
+        '''
         if ground_truth is None:
             return None
 
@@ -61,11 +78,14 @@ class E():
             for k, v in idx_vals.items()
             for idx in v[1]
             if v[0] == max_val
-        ]  # Get top perms as per 'most matches across metrics' and 'most top performing perms out of all perms'.
+        ]  # Get top perms as per 'most matches across metrics'.
 
         return top_perms
 
     def build_matrix(self, build: str):
+        '''
+        Builds the E matrix according to 'mode' or 'raw' methods. 
+        '''
         if build == 'mode':
             res = {k: list(np.argmax(np.bincount(list(sub_v.values()))) for sub_v in v) for k, v in self.res.items()}
         else:
@@ -76,6 +96,9 @@ class E():
         return self
 
     def get_num_clusters(self, vote: str) -> int:
+        '''
+        Get the estimated number of clusters from an E matrix.
+        '''
         if vote == 'full':
             return np.argmax(np.bincount(self.e.flatten()))
 
@@ -89,7 +112,7 @@ class E():
 
     def evaluate(self, E_res, ground_truth: int):
         '''
-        Loop over possible build/vote constructs and check performance.
+        Loop over possible build/vote constructs and check/print performance.
         '''
         print('Ensemble Clustering metrics:')
         print('----------------------------')
@@ -114,6 +137,14 @@ class E():
                     )
 
     def __call__(self, e_params: Dict) -> Dict:
+        '''
+        Call for each hyperparameter combination and algo (clustering algorithm).
+        Inputs:
+            e_params: E-matrix parameters with build and vote params.
+        Outputs:
+            E_res: "final" results for the workflow, containing estimated number of clusters and
+                   best algorithm-hyperparameter combination to use per dataset and across all.
+        '''
         E_res = {
             build: {
                 vote: {
