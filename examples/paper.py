@@ -59,7 +59,7 @@ e_params = {
 full_res = []
 my_ensemble = Ensemble(algo_metrics, algo_params, h_params)
 
-for seed in tqdm(range(1, 101), desc=cluster_str, ncols=100):
+for seed in tqdm(range(1, 101), desc='Datasets', ncols=100):
     X, y = make_blobs(n_samples=30000, centers=3, n_features=2, center_box=(-5, 5), random_state=seed)
     
     # Get results.
@@ -67,4 +67,4 @@ for seed in tqdm(range(1, 101), desc=cluster_str, ncols=100):
     full_res.append(res)
 
 my_E = E(full_res, my_ensemble.param_perms)
-E_res = E(e_params)
+E_res = my_E(e_params)
