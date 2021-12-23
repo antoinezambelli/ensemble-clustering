@@ -1,15 +1,13 @@
 '''
-#
-# ensemble-clustering setup.py
-#
-# Copyright(c) 2021, Antoine Emil Zambelli.
-#
+ensemble-clustering: setup.py.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 from setuptools import setup, find_packages
 
 
-version = '0.2.7'
+version = '0.3.0'
 
 setup(
     name='ensemble-clustering',

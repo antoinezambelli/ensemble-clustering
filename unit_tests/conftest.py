@@ -1,5 +1,7 @@
 '''
-Fixtrues for unit tests.
+conftest.py: Fixtures for unit tests.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 import pytest
@@ -8,7 +10,6 @@ import numpy as np
 from sklearn.datasets import make_blobs
 
 
-# Used to test full permutation logic.
 @pytest.fixture
 def algo_metrics_init():
 

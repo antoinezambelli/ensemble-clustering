@@ -1,3 +1,9 @@
+'''
+ensemble.py: Contains Ensemble class which generates clusterings for all permutations, optionally builds matrix.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
+'''
+
 import itertools
 from typing import (
     Dict,
@@ -18,6 +24,13 @@ class Ensemble():
     def __init__(self, algo_metrics: Dict[str, List[str]], algo_params: Dict[str, Dict], h_params: Dict[str, Dict]):
         '''
         On init, just compute all the parameter combinations.
+        Inputs:
+            algo_metrics: dictionary of metrics to use with each algorithm.
+            algo_params: dicitonary of "higher-level" params to pass in to algorithms.
+            h_params: dictionary of hyperparameter values to look at.
+        Outputs:
+            self.param_perms: dictionary keyed by algo, contains list of all parameter combinations for easy access
+                              ie, model(**self.param_perms[cluster_str][0]).
         '''
         # Store for later.
         self.algo_params = algo_params
@@ -48,6 +61,9 @@ class Ensemble():
                 ]
 
     def generate_results(self, my_clust: Clustering, algo_selections: List[str]) -> Dict[str, List[Dict]]:
+        '''
+        Loop over the algo-param combinations to build out the result set.
+        '''
         res = {algo: [] for algo in algo_selections}  # Results holder.
 
         # Loop through all algorithms.
@@ -68,7 +84,15 @@ class Ensemble():
             algo_selections: Optional[List[str]]=None
         ) -> Union[Tuple[Dict[str, List[Dict]], Dict], Tuple[Dict[str, List[Dict]], None]]:
         '''
-        On call, pass in workflow stuff (just algos to examine and (2,7) range for now) and datasets.
+        On call, pass in workflow-related information.
+        Inputs:
+            X: dataset to cluster.
+            k_range: range to attempt for n_cluster trials, ie, (2, 7).
+            e_params: optional E-matrix parameters with build and vote params.
+            algo_selections: optional list of algorithms to examine instead of default (all algo in param_perms).
+        Outputs:
+            res: results of clusterings for algo-param-metric combinations.
+            nc: optional result from building/voting on the E matrix.
         '''
         nc = None
         my_clust = Clustering(X, k_range, self.algo_params, self.algo_metrics)  # Initialize clustering class.

@@ -1,5 +1,7 @@
 '''
-Unit tests for utils.py
+test_utils.py: Unit tests for utils.py.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 import pytest

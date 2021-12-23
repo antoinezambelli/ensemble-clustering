@@ -1,5 +1,7 @@
 '''
-Unit tests for ensemble.py
+test_ensemble.py: Unit tests for ensemble.py.
+
+Copyright(c) 2021, Antoine Emil Zambelli.
 '''
 
 import pytest
