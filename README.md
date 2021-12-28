@@ -2,7 +2,7 @@
 
 ![Tests](https://github.com/antoinezambelli/ensemble-clustering/actions/workflows/unit-tests.yml/badge.svg) [![codecov](https://codecov.io/gh/antoinezambelli/ensemble-clustering/branch/main/graph/badge.svg?token=SPW6ID4OOM)](https://codecov.io/gh/antoinezambelli/ensemble-clustering)
 
-Companion code to "Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning". TODO: link to the paper.
+Companion code to "Ensemble Method for Cluster Number Determination and Algorithm Selection in Unsupervised Learning" ([arXiv:2112.13680](https://arxiv.org/pdf/2112.13680.pdf)).
 
 Builds an ensemble clustering framework, computes clusterings and computes metrics if given ground truth.
 
